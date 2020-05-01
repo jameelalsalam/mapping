@@ -50,7 +50,7 @@ is_keyvalue(eu_caps)
 ```
 
 
-It can go inside a tibble:
+It can go inside a tibble: (although doesn't show up right in Rstudio notebook)
 
 ```{r cars}
 tibble(

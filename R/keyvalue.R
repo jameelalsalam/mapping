@@ -39,3 +39,20 @@ vec_ptype_abbr.keyvalue <- function(x, ...) "kv"
 
 #' @export
 vec_ptype_full.keyvalue <- function(x, ...) "keyvalue"
+
+
+##### Coercion and Casting ------------
+
+# key-value representations in R:
+# 1) named vectors name(x) -> x, chr -> any, lookup by x[name]
+# 2) two column df, df$key -> df$value, any -> any, lookup by left_join & pull
+# 3) functions, x -> f(x), any -> any, lookup by f(x), not necessarily discrete
+# 4) dictionary implementation?
+# 5) plyr::mapvectors?
+# 6) ggplot2::aes()?
+# 7) purrr::as_mapper accepts formulas (anonymous functions), but turns numeric and character into extractor functions
+
+#' @export
+vec_ptype2.keyvalue.keyvalue <- function(x, y, ...) new_keyvalue()
+
+
