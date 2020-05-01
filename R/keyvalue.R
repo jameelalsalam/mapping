@@ -17,5 +17,8 @@ format.keyvalue <- function(x, ...) {
   out
 }
 
-# vec_ptype_abbr.keyvalue <- function(x, ...) "k-v"
-# vec_ptype_full.keyvalue <- function(x, ...) "key-value"
+#' @export
+vec_ptype_abbr.keyvalue <- function(x, ...) "k-v"
+
+#' @export
+vec_ptype_full.keyvalue <- function(x, ...) "key-value"
