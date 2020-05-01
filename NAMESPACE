@@ -3,5 +3,7 @@
 S3method(format,keyvalue)
 S3method(vec_ptype_abbr,keyvalue)
 S3method(vec_ptype_full,keyvalue)
+export(is_keyvalue)
+export(keyvalue)
 export(new_keyvalue)
 import(vctrs)
