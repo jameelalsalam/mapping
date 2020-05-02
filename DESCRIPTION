@@ -12,3 +12,5 @@ LazyData: true
 Imports: 
     vctrs
 RoxygenNote: 7.1.0
+Suggests: 
+    rmarkdown
