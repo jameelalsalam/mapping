@@ -2,15 +2,23 @@
 % Please edit documentation in R/mapping.R
 \name{new_mapping}
 \alias{new_mapping}
-\title{Create a mapping that maps names to values}
+\title{Low Level Constructor for Key-Value Mappings}
 \usage{
-new_mapping(keyvals)
+new_mapping(keys, values)
+}
+\arguments{
+\item{keys}{from the domain}
+
+\item{values}{to which to map the keys
+
+Right now mapping uses a named vector lookup, so only character vectors can be keys.
+This will be generalized to vectors in the future.}
 }
 \description{
-Create a mapping that maps names to values
+Low Level Constructor for Key-Value Mappings
 }
 \examples{
-lookup <- new_mapper(c("m" = "Male", "f" = "Female", "u" = NA))
+lookup <- new_mapping(c("m", "f", "u"), c("Male", "Female", NA))
 x <- c("m", "f", "u", "f", "f", "m", "m")
 lookup(x)
 }
