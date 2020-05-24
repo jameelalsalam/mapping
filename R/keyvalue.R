@@ -1,3 +1,11 @@
+#' Vectors of Key-Value Pairs
+#'
+#' @param key vector of keys
+#' @param values vector of values
+#'
+#' Length of the `key` and `value` vectors must be the same.
+#' In order to maintain vctrs invariants, these are not valid mappings in this form.
+#'
 #' @export
 new_keyvalue <- function(key, value) {
   # ideally keys and values can be any vctrs...
@@ -6,6 +14,9 @@ new_keyvalue <- function(key, value) {
 }
 
 #' Key-value pairs
+#'
+#' @param key vector of keys
+#' @param value vector of values to which keys are mapped
 #'
 #' Implemented to be compatible with `vctrs` and easily coercible to a mapper.
 #'
@@ -18,6 +29,10 @@ keyvalue <- function(key, value) {
   new_keyvalue(key, value)
 }
 
+#' Is it a keyvalue?
+#'
+#' @param x object to check
+#'
 #' @export
 is_keyvalue <- function(x) {
   inherits(x, "keyvalue")

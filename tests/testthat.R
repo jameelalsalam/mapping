@@ -1,4 +1,4 @@
 library(testthat)
-library(mappers)
+library(mapping)
 
-test_check("mappers")
+test_check("mapping")

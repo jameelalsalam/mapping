@@ -33,7 +33,7 @@ yourpred <- new_function(
 
 
 ```{r setup}
-library(mappers)
+library(mapping)
 
 
 ```

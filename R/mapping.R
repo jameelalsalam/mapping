@@ -17,7 +17,7 @@
 new_mapping <- function(keys, values) {
   stopifnot(vec_size(keys) == vec_size(values))
 
-  keyvals <- setNames(values, keys)
+  keyvals <- stats::setNames(values, keys)
 
   structure(
     new_function(
@@ -50,7 +50,11 @@ as_mapping <- function(x, ...) {
 #' @export
 as_mapping.data.frame <- function(x, ...) {
 
+  stopifnot(ncol(x) >= 2)
+
   key_col_num <- (which("key" %in% names(x))) %0% 1
-  value_col_num
+  value_col_num <- (which("value" %in% names(x))) %0% 2 # not really right
+
+  new_mapping(keys = x[[key_col_num]], values = x[[value_col_num]])
 }
 
