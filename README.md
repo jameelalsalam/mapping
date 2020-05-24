@@ -7,16 +7,13 @@
 
 <!-- badges: end -->
 
-The goal of mappers is to provide a {vctrs} compatible key-value type,
-coercible with rlang::as\_mapper
+The goal of mapping is to provide callable key-value tables that can be
+manipulated as {vctrs}.
 
 ## Installation
 
-You can install the released version of mappers from
-[CRAN](https://CRAN.R-project.org) with:
-
 ``` r
-install.packages("mappers")
+install.packages("jameelalsalam/mapping")
 ```
 
 ## Example
@@ -25,50 +22,36 @@ This is a basic example which shows you how to solve a common problem:
 
 ``` r
 library(tibble)
-library(mappers)
+library(mapping)
 ## basic example code
 
 countries <- c("FR", "GR", "IT")
 capitals  <- c("pa", "be", "ro")
 
-eu_caps <- keyvalue(countries, capitals)
-eu_caps
-#> <keyvalue[3]>
-#> [1] FR->pa GR->be IT->ro
+# eu_caps <- keyvalue(countries, capitals)
+# eu_caps
 ```
 
 Check status:
 
 ``` r
-is_keyvalue(eu_caps)
-#> [1] TRUE
+# is_keyvalue(eu_caps)
 ```
 
-It can go inside a tibble:
+It can go inside a tibble: (although doesn’t show up right in Rstudio
+notebook)
 
 ``` r
-tibble(
-  kv = eu_caps
-)
-#> # A tibble: 3 x 1
-#>       kv
-#>     <kv>
-#> 1 FR->pa
-#> 2 GR->be
-#> 3 IT->ro
+# tibble(
+#   kv = eu_caps
+# )
 ```
 
 ``` r
-data.frame(
-  kv = eu_caps
-)
-#>       kv
-#> 1 FR->pa
-#> 2 GR->be
-#> 3 IT->ro
+# data.frame(
+#   kv = eu_caps
+# )
 ```
-
-You can also embed plots, for example:
 
 In that case, don’t forget to commit and push the resulting figure
 files, so they display on GitHub\!

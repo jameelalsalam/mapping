@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-library(mappers)
+library(mapping)
 ```
 
 The package {plyr} uses different approaches in the `revalue` and `mapvalues` functions. The `revalue` function can revalue character vectors and factors only because it uses a named vector for its map, and the keys of a named vector are character values.

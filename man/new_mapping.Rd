@@ -4,7 +4,7 @@
 \alias{new_mapping}
 \title{Create a mapping that maps names to values}
 \usage{
-new_mapping(l)
+new_mapping(keyvals)
 }
 \description{
 Create a mapping that maps names to values
