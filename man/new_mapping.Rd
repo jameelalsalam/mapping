@@ -4,12 +4,12 @@
 \alias{new_mapping}
 \title{Low Level Constructor for Key-Value Mappings}
 \usage{
-new_mapping(keys, values)
+new_mapping(key, value)
 }
 \arguments{
-\item{keys}{from the domain}
+\item{key}{vector from the domain}
 
-\item{values}{to which to map the keys
+\item{value}{vector to which to map the keys
 
 Right now mapping uses a named vector lookup, so only character vectors can be keys.
 This will be generalized to vectors in the future.}

@@ -2,6 +2,7 @@
 
 S3method(as_mapping,data.frame)
 S3method(format,keyvalue)
+S3method(format,mapping)
 S3method(vec_proxy,mapping)
 S3method(vec_ptype2,keyvalue.keyvalue)
 S3method(vec_ptype_abbr,keyvalue)
@@ -13,3 +14,4 @@ export(new_keyvalue)
 export(new_mapping)
 import(rlang)
 import(vctrs)
+importFrom(tibble,tibble)

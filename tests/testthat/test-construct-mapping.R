@@ -8,6 +8,6 @@ test_that("constructor works", {
 })
 
 test_that("calling mapping without args returns zero-length result", {
-  lookup <- new_mapping(keys = c("1"), values = 2)
+  lookup <- new_mapping(key = c("1"), value = 2)
   expect_equal(lookup(), numeric())
 })

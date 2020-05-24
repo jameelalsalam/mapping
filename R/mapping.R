@@ -1,8 +1,8 @@
 
 #' Low Level Constructor for Key-Value Mappings
 #'
-#' @param keys from the domain
-#' @param values to which to map the keys
+#' @param key vector from the domain
+#' @param value vector to which to map the keys
 #'
 #' Right now mapping uses a named vector lookup, so only character vectors can be keys.
 #' This will be generalized to vectors in the future.
@@ -14,15 +14,21 @@
 #' lookup <- new_mapping(c("m", "f", "u"), c("Male", "Female", NA))
 #' x <- c("m", "f", "u", "f", "f", "m", "m")
 #' lookup(x)
-new_mapping <- function(keys, values) {
-  stopifnot(vec_size(keys) == vec_size(values))
+new_mapping <- function(key, value) {
+  stopifnot(vec_size(key) == vec_size(value))
 
-  keyvals <- stats::setNames(values, keys)
+  keyvals <- stats::setNames(value, key)
+  keyval_df <- tibble::tibble(key = key, value = value)
 
   structure(
     new_function(
-      args = pairlist2(x=vec_ptype(keys), kv=keyvals),
-      body = quote(unname(kv[x])),
+      args = pairlist2(x=vec_ptype(key), kv=keyval_df),
+      body = quote({
+        dplyr::left_join(
+          tibble::tibble(key = x),
+          kv, by = "key"
+        )[["value"]]
+        }),
       env = caller_env()
     ),
 
@@ -37,13 +43,11 @@ vec_proxy.mapping <- function(x, ...) {
 
 #' Key-value mapping
 #'
-#' @param keys character vector of keys
-#' @param values to map the keys to
+#' @param key character vector of keys
+#' @param value to map the keys to
 #' @export
-mapping <- function(keys, values) {
-  k <- vec_cast(keys, character())
-
-  new_mapping(k, values)
+mapping <- function(key, value) {
+  new_mapping(key, value)
 }
 
 
@@ -67,6 +71,6 @@ as_mapping.data.frame <- function(x, ...) {
   key_col_num <- (which("key" %in% names(x))) %0% 1
   value_col_num <- (which("value" %in% names(x))) %0% 2 # not really right
 
-  new_mapping(keys = x[[key_col_num]], values = x[[value_col_num]])
+  new_mapping(key = x[[key_col_num]], value = x[[value_col_num]])
 }
 

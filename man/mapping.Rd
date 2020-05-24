@@ -4,12 +4,12 @@
 \alias{mapping}
 \title{Key-value mapping}
 \usage{
-mapping(keys, values)
+mapping(key, value)
 }
 \arguments{
-\item{keys}{character vector of keys}
+\item{key}{character vector of keys}
 
-\item{values}{to map the keys to}
+\item{value}{to map the keys to}
 }
 \description{
 Key-value mapping
