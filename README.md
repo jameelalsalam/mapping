@@ -28,24 +28,30 @@ library(mapping)
 ## basic example code
 
 countries <- c("FR", "GR", "IT")
-capitals  <- c("pa", "be", "ro")
+capitals  <- c("Paris", "Berlin", "Rome")
 
-# eu_caps <- keyvalue(countries, capitals)
-# eu_caps
+eu_caps <- mapping(countries, capitals)
+eu_caps
+#> <mapping[3]>
+#> [1] Paris  Berlin Rome
 ```
 
-Check status:
+Display:
+
+Apply the mapping:
 
 ``` r
-# is_keyvalue(eu_caps)
+eu_caps(countries)
+#> [1] "Paris"  "Berlin" "Rome"
 ```
 
-It can go inside a tibble: (although doesn’t show up right in Rstudio
-notebook)
+The keys, values, and keyvalues can be retrieved, queried, and modified:
+
+In future, it will go inside a tibble:
 
 ``` r
 # tibble(
-#   kv = eu_caps
+#  kv = eu_caps
 # )
 ```
 
@@ -55,5 +61,4 @@ notebook)
 # )
 ```
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub\!
+Compose mappings:

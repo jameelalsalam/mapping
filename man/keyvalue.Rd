@@ -6,6 +6,13 @@
 \usage{
 keyvalue(key, value)
 }
+\arguments{
+\item{key}{vector of keys}
+
+\item{value}{vector of values to which keys are mapped
+
+Implemented to be compatible with `vctrs` and easily coercible to a mapper.}
+}
 \description{
-Implemented to be compatible with `vctrs` and easily coercible to a mapper.
+Key-value pairs
 }

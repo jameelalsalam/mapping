@@ -26,7 +26,7 @@ new_mapping <- function(keys, values) {
       env = caller_env()
     ),
 
-    class = c("mapping")
+    class = c("mapping", "vctrs_vctr")
   )
 }
 
@@ -34,6 +34,18 @@ new_mapping <- function(keys, values) {
 vec_proxy.mapping <- function(x, ...) {
   fn_fmls(x)[["kv"]]
 }
+
+#' Key-value mapping
+#'
+#' @param keys character vector of keys
+#' @param values to map the keys to
+#' @export
+mapping <- function(keys, values) {
+  k <- vec_cast(keys, character())
+
+  new_mapping(k, values)
+}
+
 
 #' Coerce objects to callable mappings
 #'
