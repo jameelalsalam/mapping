@@ -26,7 +26,7 @@ new_mapping <- function(key, value) {
       body = quote({
         dplyr::left_join(
           tibble::tibble(key = x),
-          tibble::tibble(key = keys(kv), value = values(kv)),
+          tibble::tibble(key = kv_keys(kv), value = kv_values(kv)),
           by = "key"
         )[["value"]]
         }),

@@ -16,7 +16,3 @@ test_that("constructor works", {
   #TODO: vec_c(kv1, kv3) creates problems b/c I need to learn how to coerce partial types...
 })
 
-test_that("calling mapping without args returns zero-length result", {
-  lookup <- new_mapping(key = c("1"), value = 2)
-  expect_equal(lookup(), numeric())
-})
