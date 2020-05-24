@@ -1,0 +1,39 @@
+---
+title: "partials"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The programming language Clojure has an interesting pattern whereby dictionaries are 'callable' as functions so that calling a dictionary with a set of keys returns associated values. In many ways, this is similar to character subsetting. Part of the goal of this package is to emulate this approach for more generalized discrete maps.
+
+An alternative idiom that would leave the `[` operator intact would be to use functions instead. This would have the advantage of being able to pass a function. It would be nice if creating teh functino was not a one-way proposition. E.g., that after the function is created, it would still be possible to extract the mapping data, modify it, and create a modified mapping function.
+
+Two existing tools that speak to this are `purrr::partial` and the `rlang` function-manipulation functions.
+
+```{r}
+library(rlang)
+
+mypred <- function(x, ret=TRUE) ret
+
+mypred()
+
+```
+
+```{r}
+yourpred <- new_function(
+  args
+)
+```
+
+
+
+```{r setup}
+library(mappers)
+
+
+```

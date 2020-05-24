@@ -107,5 +107,15 @@ tibble(
 
 ```
 
+The purrr function `as_mapper` sounds a lot like what I've been thinking of. Unfortunately, it is talking about something different. When used with a character, numeric, or list, it generates an extractor function, which is useful for the deeply nested objects that frequently result from json/api requests.
+
+```{r purrr}
+
+```
+
+purrr also deals in predicate functions, which map arbitrary values to boolean.
+
+
+
 
 

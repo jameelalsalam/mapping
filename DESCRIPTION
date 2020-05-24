@@ -10,7 +10,9 @@ License: What license is it under?
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    vctrs
+    vctrs,
+    rlang
 RoxygenNote: 7.1.0
 Suggests: 
-    rmarkdown
+    rmarkdown,
+    testthat
