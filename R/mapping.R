@@ -26,7 +26,7 @@ new_mapping <- function(keys, values) {
       env = caller_env()
     ),
 
-    class = c("mapping", "vctrs_vctr")
+    class = c("mapping")
   )
 }
 
@@ -34,3 +34,23 @@ new_mapping <- function(keys, values) {
 vec_proxy.mapping <- function(x, ...) {
   fn_fmls(x)[["kv"]]
 }
+
+#' Coerce objects to callable mappings
+#'
+#' @param x object to coerce
+#' @param ... reserved
+#'
+#' Generic function. Methods for named vectors (chr -> vctr), dfs (df[[1]] -> df[[2]]), lists (l[[1]] -> l[[2]]), and functions (as is, but with no more than one required parameter).
+#'
+as_mapping <- function(x, ...) {
+  UseMethod("as_mapping", x)
+}
+
+#' @method as_mapping data.frame
+#' @export
+as_mapping.data.frame <- function(x, ...) {
+
+  key_col_num <- (which("key" %in% names(x))) %0% 1
+  value_col_num
+}
+
