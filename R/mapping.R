@@ -36,9 +36,29 @@ new_mapping <- function(key, value) {
   )
 }
 
+mapping_df <- function(x) {
+  fn_fmls(x)[["kv"]]
+}
+
+#' Retrieve mapping values
+#'
+#' @export
+mapping_values <- function(x) {
+  fn_fmls(x)[["kv"]][["value"]]
+}
+
+#' Retrieve mapping keys
+#'
+#' @export
+mapping_keys <- function(x) {
+  fn_fmls(x)[["kv"]][["key"]]
+}
+
+
+
 #' @export
 vec_proxy.mapping <- function(x, ...) {
-  fn_fmls(x)[["kv"]]
+  mapping_df(x)
 }
 
 #' Key-value mapping
@@ -73,4 +93,5 @@ as_mapping.data.frame <- function(x, ...) {
 
   new_mapping(key = x[[key_col_num]], value = x[[value_col_num]])
 }
+
 
