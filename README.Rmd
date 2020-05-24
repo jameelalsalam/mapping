@@ -33,32 +33,42 @@ install.packages("jameelalsalam/mapping")
 This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
-library(tibble)
 library(mapping)
+suppressPackageStartupMessages(library(tidyverse))
 ## basic example code
 
 countries <- c("FR", "GR", "IT")
 capitals  <- c("Paris", "Berlin", "Rome")
 
 eu_caps <- mapping(countries, capitals)
-eu_caps
+
 ```
 
 Display:
 ```{r display}
-
+eu_caps
 ```
 
 
 Apply the mapping:
 ```{r apply}
 eu_caps(countries)
-
 ```
+
+Use in tidyverse pipelines:
+```{r tv}
+tibble(
+  countries = c("FR", "FR", "IT", "GR")
+) %>%
+  mutate(capitals = eu_caps(countries))
+```
+
 
 The keys, values, and keyvalues can be retrieved, queried, and modified:
 ```{r query}
+mapping_keys(eu_caps)
 
+mapping_values(eu_caps)
 ```
 
 
@@ -71,9 +81,8 @@ The keys, values, and keyvalues can be retrieved, queried, and modified:
 In future, it will go inside a tibble:
 
 ```{r intbl}
-# tibble(
-#  kv = eu_caps
-# )
+
+  
 ```
 
 ```{r indf}

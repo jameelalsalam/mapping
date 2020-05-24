@@ -21,7 +21,7 @@ new_keyvalue <- function(key, value) {
 #' Implemented to be compatible with `vctrs` and easily coercible to a mapper.
 #'
 #' @export
-keyvalue <- function(key, value) {
+keyvalue <- function(key = unspecified(), value = unspecified()) {
 
   # more user-friendly, e.g., casting inputs where possible
   # maybe checking sizes are the same?
@@ -45,7 +45,6 @@ format.keyvalue <- function(x, ...) {
   value <- field(x, "value")
 
   out <- paste0(key, "->", value)
-
   out
 }
 
@@ -68,6 +67,9 @@ vec_ptype_full.keyvalue <- function(x, ...) "keyvalue"
 # 7) purrr::as_mapper accepts formulas (anonymous functions), but turns numeric and character into extractor functions
 
 #' @export
-vec_ptype2.keyvalue.keyvalue <- function(x, y, ...) new_keyvalue()
+vec_ptype2.keyvalue.keyvalue <- function(x, y, ...) {x}
+
+#' @export
+vec_cast.keyvalue.keyvalue <- function(x, to, ...) {x}
 
 

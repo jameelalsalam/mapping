@@ -26,7 +26,8 @@ new_mapping <- function(key, value) {
       body = quote({
         dplyr::left_join(
           tibble::tibble(key = x),
-          kv, by = "key"
+          tibble::tibble(key = keys(kv), value = values(kv)),
+          by = "key"
         )[["value"]]
         }),
       env = caller_env()
@@ -56,10 +57,7 @@ mapping_keys <- function(x) {
 
 
 
-#' @export
-vec_proxy.mapping <- function(x, ...) {
-  mapping_df(x)
-}
+
 
 #' Key-value mapping
 #'
