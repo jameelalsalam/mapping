@@ -21,7 +21,7 @@ new_mapping <- function(keys, values) {
 
   structure(
     new_function(
-      args = pairlist2(x=NULL, kv=keyvals),
+      args = pairlist2(x=vec_ptype(keys), kv=keyvals),
       body = quote(unname(kv[x])),
       env = caller_env()
     ),
