@@ -4,3 +4,5 @@
 ^vignettes/articles$
 ^\.github$
 ^LICENSE\.md$
+
+^scratch$

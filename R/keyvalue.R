@@ -7,10 +7,15 @@
 #' In order to maintain vctrs invariants, these are not valid mappings in this form.
 #'
 #' @export
-new_keyvalue <- function(key, value) {
+new_keyvalue <- function(key=unspecified(), value=unspecified()) {
   # ideally keys and values can be any vctrs...
 
-  vctrs::new_rcrd(list(key=key, value=value), class="keyvalue")
+  vctrs::new_rcrd(
+    list(key=key, value=value),
+    domain = vec_ptype(key),
+    codomain = vec_ptype(value),
+
+    class="keyvalue")
 }
 
 #' Key-value pairs
@@ -23,8 +28,8 @@ new_keyvalue <- function(key, value) {
 #' @export
 keyvalue <- function(key = unspecified(), value = unspecified()) {
 
-  # more user-friendly, e.g., casting inputs where possible
-  # maybe checking sizes are the same?
+  # more user-friendly, e.g., casting inputs where possible?
+  stopifnot(vec_size(key) == vec_size(value))
 
   new_keyvalue(key, value)
 }
@@ -67,9 +72,25 @@ vec_ptype_full.keyvalue <- function(x, ...) "keyvalue"
 # 7) purrr::as_mapper accepts formulas (anonymous functions), but turns numeric and character into extractor functions
 
 #' @export
-vec_ptype2.keyvalue.keyvalue <- function(x, y, ...) {x}
+vec_ptype2.keyvalue.keyvalue <- function(x, y, ...) {
+  keyvalue(vec_ptype_common(kv_keys(x), kv_keys(y)),
+           vec_ptype_common(kv_values(x), kv_values(y)))
+}
 
+#' @method vec_cast keyvalue
 #' @export
-vec_cast.keyvalue.keyvalue <- function(x, to, ...) {x}
+vec_cast.keyvalue <- function(x, to, ...) {
+  UseMethod("vec_cast.keyvalue")
+}
+
+#' @method vec_cast.keyvalue keyvalue
+#' @export
+vec_cast.keyvalue.keyvalue <- function(x, to, ...) {
+  keyvalue(
+    vec_cast(kv_keys(x), kv_keys(to)),
+    vec_cast(kv_values(x), kv_values(to))
+  )
+}
+
 
 

@@ -13,6 +13,33 @@ test_that("constructor works", {
 
   expect_equal(vec_c(kv1, kv2), kv)
 
-  #TODO: vec_c(kv1, kv3) creates problems b/c I need to learn how to coerce partial types...
+  #vec_c(kv1, kv3)
+
+  kv_int <- new_keyvalue("1", 1L)
+  kv_dbl <- new_keyvalue("1", 1)
+  kv_chr <- new_keyvalue("1", "1")
+  kv_lgl <- new_keyvalue("1", TRUE)
+  kv_na  <- new_keyvalue("1", NA)
+
+  vec_c(kv_int, kv_dbl)
+  vec_c(kv_dbl, kv_int)
+
+  vec_c(kv_int, kv_chr)
+  vec_c(kv_chr, kv_int)
+
+  vec_c(kv_int, kv_lgl)
+  vec_c(kv_lgl, kv_int)
+
+  vec_c(kv_int, kv_na)
+  vec_c(kv_chr, kv_na)
+})
+
+test_that("the type of a keyvalue with an unspecified column retains unspecifiedness", {
+  kv1 <- keyvalue(1, NA)
+  kv2 <- keyvalue(1, unspecified(1))
+  expect <- keyvalue(numeric(), unspecified())
+
+  expect_identical(vec_ptype(kv1), expect)
+  expect_identical(vec_ptype(kv2), expect)
 })
 
