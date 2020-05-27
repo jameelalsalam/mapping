@@ -23,7 +23,7 @@ new_keyvalue <- function(key=unspecified(), value=unspecified()) {
 #' @param key vector of keys
 #' @param value vector of values to which keys are mapped
 #'
-#' Implemented to be compatible with `vctrs` and easily coercible to a mapper.
+#' Implemented to be compatible with `vctrs` and easily coercible to a mapping.
 #'
 #' @export
 keyvalue <- function(key = unspecified(), value = unspecified()) {
@@ -46,8 +46,8 @@ is_keyvalue <- function(x) {
 #' @import vctrs
 #' @export
 format.keyvalue <- function(x, ...) {
-  key <- field(x, "key")
-  value <- field(x, "value")
+  key <- kv_keys(x)
+  value <- kv_values(x)
 
   out <- paste0(key, "->", value)
   out
@@ -57,7 +57,9 @@ format.keyvalue <- function(x, ...) {
 vec_ptype_abbr.keyvalue <- function(x, ...) "kv"
 
 #' @export
-vec_ptype_full.keyvalue <- function(x, ...) "keyvalue"
+vec_ptype_full.keyvalue <- function(x, ...) {
+  paste0("keyvalue<", vec_ptype_abbr(kv_keys(x)), "->", vec_ptype_abbr(kv_values(x)), ">")}
+
 
 
 ##### Coercion and Casting ------------

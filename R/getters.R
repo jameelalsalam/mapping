@@ -4,7 +4,7 @@
 #'
 #' @export
 kv_keys <- function(kv) {
-  field(kv, "key")
+  unclass(kv)[["key"]]
 }
 
 #' Get keyvalue values
@@ -13,7 +13,7 @@ kv_keys <- function(kv) {
 #'
 #' @export
 kv_values <- function(kv) {
-  field(kv, "value")
+  unclass(kv)[["value"]]
 }
 
 
