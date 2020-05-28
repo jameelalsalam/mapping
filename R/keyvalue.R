@@ -118,4 +118,23 @@ vec_cast.keyvalue.keyvalue <- function(x, to, ...) {
 }
 
 
+# Subsetting --------------------------------------------------------------
+
+#' @export
+`[.keyvalue` <-  function(x, i, ...) {
+  stop("gonna do crazy stuff here.")
+  #vec_index(x, i, ...)
+}
+
+#' @export
+`[[.keyvalue` <- function(x, i, ...) {
+  #out <- lapply(vec_data(x), `[[`, i, ...)
+  #vec_restore(out, x)
+  stop("gonna do crazy stuff here.")
+}
+
+#' @export
+`$.keyvalue` <- function(x, i, ...) {
+  stop("keyvalues do not support `$`.")
+}
 
