@@ -4,7 +4,7 @@
 \alias{new_keyvalue}
 \title{Vectors of Key-Value Pairs}
 \usage{
-new_keyvalue(key, value)
+new_keyvalue(key = unspecified(), value = unspecified())
 }
 \arguments{
 \item{key}{vector of keys}

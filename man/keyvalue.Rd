@@ -11,7 +11,7 @@ keyvalue(key = unspecified(), value = unspecified())
 
 \item{value}{vector of values to which keys are mapped
 
-Implemented to be compatible with `vctrs` and easily coercible to a mapper.}
+Implemented to be compatible with `vctrs` and easily coercible to a mapping.}
 }
 \description{
 Key-value pairs

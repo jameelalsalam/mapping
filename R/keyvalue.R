@@ -10,13 +10,23 @@
 new_keyvalue <- function(key=unspecified(), value=unspecified()) {
   # ideally keys and values can be any vctrs...
 
-  vctrs::new_rcrd(
-    list(key=key, value=value),
-    domain = vec_ptype(key),
-    codomain = vec_ptype(value),
-
-    class="keyvalue")
+  structure(
+    tibble(key=key, value=value),
+    class = c("keyvalue", class(tibble()))
+  )
 }
+
+#' @export
+length.keyvalue <- function(x) {
+  vec_size(x)
+}
+
+#' @export
+names.keyvalue <- function(x) {
+  NULL
+}
+
+
 
 #' Key-value pairs
 #'
@@ -34,6 +44,14 @@ keyvalue <- function(key = unspecified(), value = unspecified()) {
   new_keyvalue(key, value)
 }
 
+#' @export
+as_keyvalue <- function(x) {
+  stopifnot("value" %in% colnames(x))
+  stopifnot("key" %in% colnames(x))
+
+  keyvalue(unclass(x)[["key"]], unclass(x)[["value"]])
+}
+
 #' Is it a keyvalue?
 #'
 #' @param x object to check
@@ -49,7 +67,7 @@ format.keyvalue <- function(x, ...) {
   key <- kv_keys(x)
   value <- kv_values(x)
 
-  out <- paste0(key, "->", value)
+  out <- paste0(key, vec_recycle("->", vec_size(x)), value)
   out
 }
 
@@ -75,8 +93,9 @@ vec_ptype_full.keyvalue <- function(x, ...) {
 
 #' @export
 vec_ptype2.keyvalue.keyvalue <- function(x, y, ...) {
-  keyvalue(vec_ptype_common(kv_keys(x), kv_keys(y)),
-           vec_ptype_common(kv_values(x), kv_values(y)))
+  as_keyvalue(tib_ptype2(x, y, ...))
+  # keyvalue(vec_ptype_common(kv_keys(x), kv_keys(y)),
+  #          vec_ptype_common(kv_values(x), kv_values(y)))
 }
 
 #' @method vec_cast keyvalue
@@ -88,10 +107,11 @@ vec_cast.keyvalue <- function(x, to, ...) {
 #' @method vec_cast.keyvalue keyvalue
 #' @export
 vec_cast.keyvalue.keyvalue <- function(x, to, ...) {
-  keyvalue(
-    vec_cast(kv_keys(x), kv_keys(to)),
-    vec_cast(kv_values(x), kv_values(to))
-  )
+  as_keyvalue(tib_cast(x, to, ...))
+  # keyvalue(
+  #   vec_cast(kv_keys(x), kv_keys(to)),
+  #   vec_cast(kv_values(x), kv_values(to))
+  # )
 }
 
 
