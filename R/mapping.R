@@ -75,9 +75,16 @@ mapping <- function(key, value) {
 #' @param ... reserved
 #'
 #' Generic function. Methods for named vectors (chr -> vctr), dfs (df[[1]] -> df[[2]]), lists (l[[1]] -> l[[2]]), and functions (as is, but with no more than one required parameter).
-#'
+#' @export
 as_mapping <- function(x, ...) {
   UseMethod("as_mapping", x)
+}
+
+#' @method as_mapping keyvalue
+#' @export
+as_mapping.keyvalue <- function(x, ...) {
+
+  new_mapping(key = kv_keys(x), value = kv_values(x))
 }
 
 #' @method as_mapping data.frame

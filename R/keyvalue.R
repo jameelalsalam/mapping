@@ -122,7 +122,9 @@ vec_cast.keyvalue.keyvalue <- function(x, to, ...) {
 
 #' @export
 `[.keyvalue` <-  function(x, i, ...) {
-  stop("gonna do crazy stuff here.")
+
+  vec_slice(x, vec_match(i, kv_keys(x)))
+  #stop("gonna do crazy stuff here.")
   #vec_index(x, i, ...)
 }
 
@@ -130,7 +132,7 @@ vec_cast.keyvalue.keyvalue <- function(x, to, ...) {
 `[[.keyvalue` <- function(x, i, ...) {
   #out <- lapply(vec_data(x), `[[`, i, ...)
   #vec_restore(out, x)
-  stop("gonna do crazy stuff here.")
+  stop("not sure yet what `[[` is for a keyvalue...")
 }
 
 #' @export
