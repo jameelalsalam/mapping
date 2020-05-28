@@ -26,41 +26,6 @@ names.keyvalue <- function(x) {
   NULL
 }
 
-
-
-#' Key-value pairs
-#'
-#' @param key vector of keys
-#' @param value vector of values to which keys are mapped
-#'
-#' Implemented to be compatible with `vctrs` and easily coercible to a mapping.
-#'
-#' @export
-keyvalue <- function(key = unspecified(), value = unspecified()) {
-
-  # more user-friendly, e.g., casting inputs where possible?
-  stopifnot(vec_size(key) == vec_size(value))
-
-  new_keyvalue(key, value)
-}
-
-#' @export
-as_keyvalue <- function(x) {
-  stopifnot("value" %in% colnames(x))
-  stopifnot("key" %in% colnames(x))
-
-  keyvalue(unclass(x)[["key"]], unclass(x)[["value"]])
-}
-
-#' Is it a keyvalue?
-#'
-#' @param x object to check
-#'
-#' @export
-is_keyvalue <- function(x) {
-  inherits(x, "keyvalue")
-}
-
 #' @import vctrs
 #' @export
 format.keyvalue <- function(x, ...) {
@@ -80,6 +45,42 @@ vec_ptype_full.keyvalue <- function(x, ...) {
 
 
 
+
+
+
+
+
+
+#' Key-value pairs
+#'
+#' @param key vector of keys
+#' @param value vector of values to which keys are mapped
+#'
+#' Implemented to be compatible with `vctrs` and easily coercible to a mapping.
+#'
+#' @export
+keyvalue <- function(key = unspecified(), value = unspecified()) {
+
+  # more user-friendly, e.g., casting inputs where possible?
+  stopifnot(vec_size(key) == vec_size(value))
+
+  new_keyvalue(key, value)
+}
+
+
+
+#' Is it a keyvalue?
+#'
+#' @param x object to check
+#'
+#' @export
+is_keyvalue <- function(x) {
+  inherits(x, "keyvalue")
+}
+
+
+
+
 ##### Coercion and Casting ------------
 
 # key-value representations in R:
@@ -92,10 +93,16 @@ vec_ptype_full.keyvalue <- function(x, ...) {
 # 7) purrr::as_mapper accepts formulas (anonymous functions), but turns numeric and character into extractor functions
 
 #' @export
+as_keyvalue <- function(x) {
+  stopifnot("value" %in% colnames(x))
+  stopifnot("key" %in% colnames(x))
+
+  keyvalue(unclass(x)[["key"]], unclass(x)[["value"]])
+}
+
+#' @export
 vec_ptype2.keyvalue.keyvalue <- function(x, y, ...) {
   as_keyvalue(tib_ptype2(x, y, ...))
-  # keyvalue(vec_ptype_common(kv_keys(x), kv_keys(y)),
-  #          vec_ptype_common(kv_values(x), kv_values(y)))
 }
 
 #' @method vec_cast keyvalue
@@ -108,10 +115,6 @@ vec_cast.keyvalue <- function(x, to, ...) {
 #' @export
 vec_cast.keyvalue.keyvalue <- function(x, to, ...) {
   as_keyvalue(tib_cast(x, to, ...))
-  # keyvalue(
-  #   vec_cast(kv_keys(x), kv_keys(to)),
-  #   vec_cast(kv_values(x), kv_values(to))
-  # )
 }
 
 

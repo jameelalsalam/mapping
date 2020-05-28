@@ -68,16 +68,13 @@ test_that("na can be combined with any other types", {
   expect_equal(vec_c(kv_chr, kv_na), keyvalue(c("1", "1"), c("1", NA_character_)))
 })
 
+# Not possible with rcrd, so switched to tibble: https://github.com/r-lib/vctrs/issues/1118
+test_that("the type of a keyvalue with an unspecified column retains unspecifiedness", {
+  kv1 <- keyvalue(1, NA)
+  kv2 <- keyvalue(1, unspecified(1))
+  expect <- keyvalue(numeric(), unspecified())
 
-
-
-# Not currently possible: https://github.com/r-lib/vctrs/issues/1118
-# test_that("the type of a keyvalue with an unspecified column retains unspecifiedness", {
-#   kv1 <- keyvalue(1, NA)
-#   kv2 <- keyvalue(1, unspecified(1))
-#   expect <- keyvalue(numeric(), unspecified())
-#
-#   expect_identical(vec_ptype(kv1), expect)
-#   expect_identical(vec_ptype(kv2), expect)
-# })
+  expect_identical(vec_ptype(kv1), expect)
+  expect_identical(vec_ptype(kv2), expect)
+})
 
